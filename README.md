@@ -1,4 +1,4 @@
-# vue-yatzy
+# vue-yahtzee
 
 ## Project setup
 ```
