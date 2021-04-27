@@ -1,38 +1,43 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+    <div id="board">
+      <table class="board-table">
+        <thead>
+          <board-row description="Players" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+        </thead>
+        <tbody>
+          <board-row description="Ones" v-bind:columns="8"></board-row>
+          <board-row description="Twoes" v-bind:columns="8"></board-row>
+          <board-row description="Threes" v-bind:columns="8"></board-row>
+          <board-row description="Fours" v-bind:columns="8"></board-row>
+          <board-row description="Fives" v-bind:columns="8"></board-row>
+          <board-row description="Sixes" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+
+          <board-row description="Sum" v-bind:columns="8"></board-row>
+          <board-row description="Bonus" v-bind:columns="8"></board-row>
+          <board-row description="1 pair" v-bind:columns="8"></board-row>
+          <board-row description="2 pairs" v-bind:columns="8"></board-row>
+          <board-row description="3 equal" v-bind:columns="8"></board-row>
+          <board-row description="4 equal" v-bind:columns="8"></board-row>
+          <board-row description="Small straight" v-bind:columns="8"></board-row>
+          <board-row description="Big straight" v-bind:columns="8"></board-row>
+          <board-row description="House" v-bind:columns="8"></board-row>
+          <board-row description="Chance" v-bind:columns="8"></board-row>
+          <board-row description="Yatzy" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+
+          <board-row description="Sumtotal" v-bind:columns="8"></board-row>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script>
+import BoardRow from "@/components/BoardRow";
 export default {
   name: 'VueYahtzee',
+  components: {BoardRow},
   props: {
     msg: String
   }
@@ -54,5 +59,44 @@ li {
 }
 a {
   color: #42b983;
+}
+
+#board {
+  /*display: grid;*/
+  /*grid-template-columns: auto repeat(8, 40px);*/
+  /*grid-template-rows: 40px 40px;*/
+  /*border: 1px solid black;*/
+}
+
+.board-table {
+  empty-cells: show;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.board-table thead {
+  font-weight: bold;
+}
+
+.board-table tbody {
+  font-weight: normal;
+}
+
+.board-table tr {
+  border: 1px solid black;
+}
+
+.board-table th {
+  background-color: yellowgreen;
+  border-left: 5px solid black;
+}
+
+.board-table td {
+  /*border: 1px solid black;*/
+  border-left: 5px solid black;
+}
+
+.board-table:nth-child(1) {
+  text-align: left;
 }
 </style>
