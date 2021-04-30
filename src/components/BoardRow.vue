@@ -1,15 +1,15 @@
 <template>
   <tr class="row" :class="thickBottomBorder && 'thick-bottom-border'">
     <th class="board-col">{{ description }}</th>
-    <td class="board-col"></td>
-    <td class="board-col"></td>
-    <td class="board-col"></td>
+    <template v-for="column in columns">
+      <td class="board-col" v-bind:key="column"></td>
+    </template>
   </tr>
 </template>
 
 <script>
 export default {
-name: "BoardRow",
+  name: "BoardRow",
   props: {
     description: String,
     columns: Number,
@@ -17,7 +17,7 @@ name: "BoardRow",
       default: false,
       type: Boolean
     }
-  }
+  },
 }
 </script>
 
@@ -41,5 +41,4 @@ name: "BoardRow",
   /*border: 1px solid black;*/
   border-left: 1px solid black;
 }
-
 </style>

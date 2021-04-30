@@ -1,32 +1,33 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <Settings :playerAmount="playerAmount" @set-player-amount="playerAmount = $event" />
     <div id="board">
       <table class="board-table">
         <thead>
-          <board-row description="Players" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+          <board-row description="Players" :columns="playerAmount" :thickBottomBorder="true"></board-row>
         </thead>
         <tbody>
-          <board-row description="Ones" v-bind:columns="8"></board-row>
-          <board-row description="Twoes" v-bind:columns="8"></board-row>
-          <board-row description="Threes" v-bind:columns="8"></board-row>
-          <board-row description="Fours" v-bind:columns="8"></board-row>
-          <board-row description="Fives" v-bind:columns="8"></board-row>
-          <board-row description="Sixes" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+          <board-row description="Ones" :columns="playerAmount"></board-row>
+          <board-row description="Twoes" :columns="playerAmount"></board-row>
+          <board-row description="Threes" :columns="playerAmount"></board-row>
+          <board-row description="Fours" :columns="playerAmount"></board-row>
+          <board-row description="Fives" :columns="playerAmount"></board-row>
+          <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sum" v-bind:columns="8"></board-row>
-          <board-row description="Bonus" v-bind:columns="8"></board-row>
-          <board-row description="1 pair" v-bind:columns="8"></board-row>
-          <board-row description="2 pairs" v-bind:columns="8"></board-row>
-          <board-row description="3 equal" v-bind:columns="8"></board-row>
-          <board-row description="4 equal" v-bind:columns="8"></board-row>
-          <board-row description="Small straight" v-bind:columns="8"></board-row>
-          <board-row description="Big straight" v-bind:columns="8"></board-row>
-          <board-row description="House" v-bind:columns="8"></board-row>
-          <board-row description="Chance" v-bind:columns="8"></board-row>
-          <board-row description="Yatzy" v-bind:columns="8" v-bind:thickBottomBorder="true"></board-row>
+          <board-row description="Sum" :columns="playerAmount"></board-row>
+          <board-row description="Bonus" :columns="playerAmount"></board-row>
+          <board-row description="1 pair" :columns="playerAmount"></board-row>
+          <board-row description="2 pairs" :columns="playerAmount"></board-row>
+          <board-row description="3 equal" :columns="playerAmount"></board-row>
+          <board-row description="4 equal" :columns="playerAmount"></board-row>
+          <board-row description="Small straight" :columns="playerAmount"></board-row>
+          <board-row description="Big straight" :columns="playerAmount"></board-row>
+          <board-row description="House" :columns="playerAmount"></board-row>
+          <board-row description="Chance" :columns="playerAmount"></board-row>
+          <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sumtotal" v-bind:columns="8"></board-row>
+          <board-row description="Sumtotal" :columns="playerAmount"></board-row>
         </tbody>
       </table>
     </div>
@@ -34,12 +35,24 @@
 </template>
 
 <script>
+import Settings from "@/components/Settings";
 import BoardRow from "@/components/BoardRow";
 export default {
   name: 'VueYahtzee',
-  components: {BoardRow},
+  components: {
+    Settings,
+    BoardRow
+  },
   props: {
     msg: String
+  },
+  data() {
+    return {
+      playerAmount: 6
+    }
+  },
+  methods: {
+
   }
 }
 </script>
