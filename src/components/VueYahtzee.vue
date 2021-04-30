@@ -3,7 +3,7 @@
     <h1>{{ msg }}</h1>
     <Settings :playerAmount="playerAmount" @set-player-amount="playerAmount = $event" />
     <div id="board">
-      <table class="board-table">
+      <table class="board-table paper stacked">
         <thead>
           <board-row description="Players" :columns="playerAmount" :thickBottomBorder="true"></board-row>
         </thead>
@@ -107,9 +107,54 @@ a {
 .board-table td {
   /*border: 1px solid black;*/
   border-left: 5px solid black;
+  font-family: cursive;
 }
 
 .board-table:nth-child(1) {
   text-align: left;
 }
+
+.paper {
+  /*width: 150rem;*/
+  /*margin: 0 auto;*/
+  /*height: 19rem;*/
+  /*position: relative;*/
+  /*border: 1px solid red;*/
+}
+
+
+
+
+
 </style>
+
+<style lang="scss" scoped>
+// Variables
+$yellow-paper: rgb(248, 234, 105);
+$white-paper: #f1f1f1;
+$paper-width: 15rem;
+$paper-height: 19rem;
+$transition-time: 0.4s;
+$number-of-middle-folded-parts: 4;
+$fold-part-height: $paper-height / 4;
+
+// Mixins
+@mixin stacked-shadow($through, $even-color, $odd-color) {
+  $shadow : "";
+  @for $i from 1 through $through {
+    @if ($i % 2 == 0) {
+      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$even-color}";
+    }
+    @else {
+      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$odd-color}";
+    }
+    $shadow : $shadow + if($i != $through, ", ", "");
+  }
+  box-shadow: unquote($shadow);
+}
+
+.stacked {
+  @include stacked-shadow($through: 30, $even-color: rgb(219, 219, 219), $odd-color: rgb(0, 0, 0));
+}
+</style>
+
