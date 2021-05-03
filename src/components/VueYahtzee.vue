@@ -2,39 +2,54 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <Settings :playerAmount="playerAmount" @set-player-amount="playerAmount = $event" />
-    <div id="board">
-      <table class="board-table paper stacked">
-        <thead>
-          <board-row description="Players" :columns="playerAmount" :thickBottomBorder="true"></board-row>
-        </thead>
-        <tbody>
-          <board-row description="Ones" :columns="playerAmount"></board-row>
-          <board-row description="Twoes" :columns="playerAmount"></board-row>
-          <board-row description="Threes" :columns="playerAmount"></board-row>
-          <board-row description="Fours" :columns="playerAmount"></board-row>
-          <board-row description="Fives" :columns="playerAmount"></board-row>
-          <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+    <div class="board-container">
+      <div class="player-adder-container">
+        <div class="player-adder" @click="addPlayer()">
+          <span class="player-adder-text">+</span>
+          <img class="player-adder-img" src="../assets/person.png" alt="Add Player (CPU)" />
+          <div style="clear: left;"/>
+        </div>
+        <div class="player-adder" @click="addPlayer(null, false)">
+          <span class="player-adder-text">+</span>
+          <img class="player-adder-img" src="../assets/cpu.svg" alt="Add Player (CPU)" />
+          <div style="clear: left;"/>
+        </div>
+      </div>
+      <div id="board">
+        <table class="board-table paper stacked">
+          <thead>
+            <board-row description="Players" :columns="playerAmount" :players="players" :thickBottomBorder="true"></board-row>
+          </thead>
+          <tbody>
+            <board-row description="Ones" :columns="playerAmount"></board-row>
+            <board-row description="Twoes" :columns="playerAmount"></board-row>
+            <board-row description="Threes" :columns="playerAmount"></board-row>
+            <board-row description="Fours" :columns="playerAmount"></board-row>
+            <board-row description="Fives" :columns="playerAmount"></board-row>
+            <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sum" :columns="playerAmount"></board-row>
-          <board-row description="Bonus" :columns="playerAmount"></board-row>
-          <board-row description="1 pair" :columns="playerAmount"></board-row>
-          <board-row description="2 pairs" :columns="playerAmount"></board-row>
-          <board-row description="3 equal" :columns="playerAmount"></board-row>
-          <board-row description="4 equal" :columns="playerAmount"></board-row>
-          <board-row description="Small straight" :columns="playerAmount"></board-row>
-          <board-row description="Big straight" :columns="playerAmount"></board-row>
-          <board-row description="House" :columns="playerAmount"></board-row>
-          <board-row description="Chance" :columns="playerAmount"></board-row>
-          <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+            <board-row description="Sum" :columns="playerAmount"></board-row>
+            <board-row description="Bonus" :columns="playerAmount"></board-row>
+            <board-row description="1 pair" :columns="playerAmount"></board-row>
+            <board-row description="2 pairs" :columns="playerAmount"></board-row>
+            <board-row description="3 equal" :columns="playerAmount"></board-row>
+            <board-row description="4 equal" :columns="playerAmount"></board-row>
+            <board-row description="Small straight" :columns="playerAmount"></board-row>
+            <board-row description="Big straight" :columns="playerAmount"></board-row>
+            <board-row description="House" :columns="playerAmount"></board-row>
+            <board-row description="Chance" :columns="playerAmount"></board-row>
+            <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sumtotal" :columns="playerAmount"></board-row>
-        </tbody>
-      </table>
+            <board-row description="Sumtotal" :columns="playerAmount"></board-row>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import {Player} from "../modules/Player.mjs";
 import Settings from "@/components/Settings";
 import BoardRow from "@/components/BoardRow";
 export default {
@@ -46,13 +61,22 @@ export default {
   props: {
     msg: String
   },
+  computed: {
+
+  },
   data() {
     return {
-      playerAmount: 6
+      gameRunning: false,
+      players: [],
+      playerAmount: 0
     }
   },
   methods: {
-
+    addPlayer(name = "Unnamed", isHuman = true) {
+      let player = new Player(name, isHuman);
+      this.players.push(player);
+      console.log("Added player", player);
+    }
   }
 }
 </script>
@@ -72,13 +96,6 @@ li {
 }
 a {
   color: #42b983;
-}
-
-#board {
-  /*display: grid;*/
-  /*grid-template-columns: auto repeat(8, 40px);*/
-  /*grid-template-rows: 40px 40px;*/
-  /*border: 1px solid black;*/
 }
 
 .board-table {
@@ -113,23 +130,11 @@ a {
 .board-table:nth-child(1) {
   text-align: left;
 }
-
-.paper {
-  /*width: 150rem;*/
-  /*margin: 0 auto;*/
-  /*height: 19rem;*/
-  /*position: relative;*/
-  /*border: 1px solid red;*/
-}
-
-
-
-
-
 </style>
 
 <style lang="scss" scoped>
 // Variables
+// Board paperstack box-shadow:
 $yellow-paper: rgb(248, 234, 105);
 $white-paper: #f1f1f1;
 $paper-width: 15rem;
@@ -137,6 +142,10 @@ $paper-height: 19rem;
 $transition-time: 0.4s;
 $number-of-middle-folded-parts: 4;
 $fold-part-height: $paper-height / 4;
+
+// Add CPU element:
+$player-adder-height: 25px;
+$player-adder-width: $player-adder-height;
 
 // Mixins
 @mixin stacked-shadow($through, $even-color, $odd-color) {
@@ -155,6 +164,28 @@ $fold-part-height: $paper-height / 4;
 
 .stacked {
   @include stacked-shadow($through: 30, $even-color: rgb(219, 219, 219), $odd-color: rgb(0, 0, 0));
+}
+
+.player-adder {
+  display: inline-block;
+}
+
+.player-adder:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.player-adder-text {
+  color: forestgreen;
+  font-size: $player-adder-height;
+  line-height: $player-adder-height;
+  float: left;
+}
+
+.player-adder-img {
+  height: $player-adder-height;
+  width: $player-adder-height;
+  float: right;
 }
 </style>
 

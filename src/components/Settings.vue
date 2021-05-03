@@ -11,7 +11,8 @@
 export default {
   name: "Settings",
   props: {
-    playerAmount: Number
+    playerAmount: Number,
+    players: Array
   },
   data: function() {
     return {
