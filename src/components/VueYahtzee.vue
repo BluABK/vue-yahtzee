@@ -3,6 +3,34 @@
     <h1>{{ msg }}</h1>
     <Settings :playerAmount="playerAmount" @set-player-amount="playerAmount = $event" />
     <div class="board-container">
+      <table class="board-table paper stacked">
+        <thead>
+          <board-row description="Players" :columns="playerAmount" :players="players" :thickBottomBorder="true"></board-row>
+        </thead>
+        <tbody>
+          <board-row description="Ones" :columns="playerAmount"></board-row>
+          <board-row description="Twoes" :columns="playerAmount"></board-row>
+          <board-row description="Threes" :columns="playerAmount"></board-row>
+          <board-row description="Fours" :columns="playerAmount"></board-row>
+          <board-row description="Fives" :columns="playerAmount"></board-row>
+          <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+
+          <board-row description="Sum" :columns="playerAmount"></board-row>
+          <board-row description="Bonus" :columns="playerAmount"></board-row>
+          <board-row description="1 pair" :columns="playerAmount"></board-row>
+          <board-row description="2 pairs" :columns="playerAmount"></board-row>
+          <board-row description="3 equal" :columns="playerAmount"></board-row>
+          <board-row description="4 equal" :columns="playerAmount"></board-row>
+          <board-row description="Small straight" :columns="playerAmount"></board-row>
+          <board-row description="Big straight" :columns="playerAmount"></board-row>
+          <board-row description="House" :columns="playerAmount"></board-row>
+          <board-row description="Chance" :columns="playerAmount"></board-row>
+          <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+
+          <board-row description="Sumtotal" :columns="playerAmount"></board-row>
+        </tbody>
+      </table>
+      <div class="board-spacer"></div>
       <div class="player-adder-container">
         <div class="player-adder" @click="addPlayer()">
           <span class="player-adder-text">+</span>
@@ -14,35 +42,6 @@
           <img class="player-adder-img" src="../assets/cpu.svg" alt="Add Player (CPU)" />
           <div style="clear: left;"/>
         </div>
-      </div>
-      <div id="board">
-        <table class="board-table paper stacked">
-          <thead>
-            <board-row description="Players" :columns="playerAmount" :players="players" :thickBottomBorder="true"></board-row>
-          </thead>
-          <tbody>
-            <board-row description="Ones" :columns="playerAmount"></board-row>
-            <board-row description="Twoes" :columns="playerAmount"></board-row>
-            <board-row description="Threes" :columns="playerAmount"></board-row>
-            <board-row description="Fours" :columns="playerAmount"></board-row>
-            <board-row description="Fives" :columns="playerAmount"></board-row>
-            <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
-
-            <board-row description="Sum" :columns="playerAmount"></board-row>
-            <board-row description="Bonus" :columns="playerAmount"></board-row>
-            <board-row description="1 pair" :columns="playerAmount"></board-row>
-            <board-row description="2 pairs" :columns="playerAmount"></board-row>
-            <board-row description="3 equal" :columns="playerAmount"></board-row>
-            <board-row description="4 equal" :columns="playerAmount"></board-row>
-            <board-row description="Small straight" :columns="playerAmount"></board-row>
-            <board-row description="Big straight" :columns="playerAmount"></board-row>
-            <board-row description="House" :columns="playerAmount"></board-row>
-            <board-row description="Chance" :columns="playerAmount"></board-row>
-            <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
-
-            <board-row description="Sumtotal" :columns="playerAmount"></board-row>
-          </tbody>
-        </table>
       </div>
     </div>
   </div>
@@ -112,7 +111,21 @@ $player-adder-width: $player-adder-height;
   box-shadow: unquote($shadow);
 }
 
+.board-container {
+  display: inline-block;
+}
+
+.board-spacer {
+  width: 20px;
+  float: left;
+}
+
+.player-adder-container {
+  float: right;
+}
+
 .board-table {
+  float: left;
   empty-cells: show;
   border-collapse: collapse;
   /*border: 1px solid black;*/
