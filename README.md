@@ -1,5 +1,10 @@
 # vue-yahtzee
 
+## GH Pages
+https://bluabk.github.io/vue-yahtzee/
+
+Usually up to date production build running out of `docs/` directory.
+
 ## Project setup
 ```
 npm install
