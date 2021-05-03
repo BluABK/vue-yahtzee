@@ -82,20 +82,34 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+<style lang="scss" scoped>
+// Variables
+// Board paper-stack box-shadow:
+$yellow-paper: rgb(248, 234, 105);
+$white-paper: #f1f1f1;
+$paper-width: 15rem;
+$paper-height: 19rem;
+$transition-time: 0.4s;
+$number-of-middle-folded-parts: 4;
+$fold-part-height: $paper-height / 4;
+
+// Add CPU element:
+$player-adder-height: 25px;
+$player-adder-width: $player-adder-height;
+
+// Mixins
+@mixin stacked-shadow($through, $even-color, $odd-color) {
+  $shadow : "";
+  @for $i from 1 through $through {
+    @if ($i % 2 == 0) {
+      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$even-color}";
+    }
+    @else {
+      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$odd-color}";
+    }
+    $shadow : $shadow + if($i != $through, ", ", "");
+  }
+  box-shadow: unquote($shadow);
 }
 
 .board-table {
@@ -129,37 +143,6 @@ a {
 
 .board-table:nth-child(1) {
   text-align: left;
-}
-</style>
-
-<style lang="scss" scoped>
-// Variables
-// Board paperstack box-shadow:
-$yellow-paper: rgb(248, 234, 105);
-$white-paper: #f1f1f1;
-$paper-width: 15rem;
-$paper-height: 19rem;
-$transition-time: 0.4s;
-$number-of-middle-folded-parts: 4;
-$fold-part-height: $paper-height / 4;
-
-// Add CPU element:
-$player-adder-height: 25px;
-$player-adder-width: $player-adder-height;
-
-// Mixins
-@mixin stacked-shadow($through, $even-color, $odd-color) {
-  $shadow : "";
-  @for $i from 1 through $through {
-    @if ($i % 2 == 0) {
-      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$even-color}";
-    }
-    @else {
-      $shadow : $shadow + "#{$i/2}px #{$i/2}px 0 0 #{$odd-color}";
-    }
-    $shadow : $shadow + if($i != $through, ", ", "");
-  }
-  box-shadow: unquote($shadow);
 }
 
 .stacked {
