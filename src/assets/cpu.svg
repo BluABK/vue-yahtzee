@@ -1,4 +1,4 @@
-<svg width="16.422mm" height="16.409mm" version="1.1" viewBox="0 0 16.422 16.409" xmlns="http://www.w3.org/2000/svg" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb">
+<svg width="16.422mm" height="16.409mm" version="1.1" viewBox="0 0 16.422 16.409" xmlns="http://www.w3.org/2000/svg">
  <title>CPU (flat design) by BluABK</title>
  <g transform="translate(-48.689 -18.25)">
   <g fill="none" stroke="#ffe500" stroke-width=".23128px">
@@ -32,8 +32,8 @@
    <path d="m48.799 22.512 1.4926-0.0022c0.14612-2.17e-4 0.14612-2.17e-4 0 0l-1.4926 0.0022c-0.14612 2.17e-4 -0.14612 2.17e-4 0 0z"/>
   </g>
   <g>
-   <path x="50.270832" y="19.84375" width="13.229166" height="13.229166" d="m51.329 19.844h11.112a1.0583 1.0583 45 0 1 1.0583 1.0583v11.112a1.0583 1.0583 135 0 1-1.0583 1.0583h-11.112a1.0583 1.0583 45 0 1-1.0583-1.0583v-11.112a1.0583 1.0583 135 0 1 1.0583-1.0583z" fill="#337236" stroke="#1d632b" stroke-width=".26458"/>
-   <path x="51.59375" y="21.166666" width="10.583333" height="10.583333" d="m51.858 21.167h10.054a0.26458 0.26458 45 0 1 0.26458 0.26458v10.054a0.26458 0.26458 135 0 1-0.26458 0.26458h-10.054a0.26458 0.26458 45 0 1-0.26458-0.26458v-10.054a0.26458 0.26458 135 0 1 0.26458-0.26458z" fill="#f2f2f2" stroke="#c2c2c2" stroke-width=".265"/>
+   <path d="m51.329 19.844h11.112a1.0583 1.0583 45 0 1 1.0583 1.0583v11.112a1.0583 1.0583 135 0 1-1.0583 1.0583h-11.112a1.0583 1.0583 45 0 1-1.0583-1.0583v-11.112a1.0583 1.0583 135 0 1 1.0583-1.0583z" fill="#337236" stroke="#1d632b" stroke-width=".26458"/>
+   <path d="m51.858 21.167h10.054a0.26458 0.26458 45 0 1 0.26458 0.26458v10.054a0.26458 0.26458 135 0 1-0.26458 0.26458h-10.054a0.26458 0.26458 45 0 1-0.26458-0.26458v-10.054a0.26458 0.26458 135 0 1 0.26458-0.26458z" fill="#f2f2f2" stroke="#c2c2c2" stroke-width=".265"/>
    <text transform="matrix(1.1824 0 0 1.1182 -10.377 -.80395)" x="54.192677" y="29.1141" fill="#333333" font-family="sans-serif" font-size="5.1133px" stroke-width=".12783" style="inline-size:8.20546;line-height:1.25;shape-inside:url(#rect12);white-space:pre" xml:space="preserve"><tspan x="52.80" y="26.50"><tspan fill="#333333" font-family="Impact" stroke-width=".12783">CPU</tspan></tspan></text>
   </g>
  </g>
