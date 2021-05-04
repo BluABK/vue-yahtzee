@@ -1,33 +1,33 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <Settings :playerAmount="playerAmount" @set-player-amount="playerAmount = $event" />
+    <Settings />
     <div class="board-container">
       <table class="board-table paper stacked">
         <thead>
-          <board-row description="Players" :columns="playerAmount" :players="players" :thickBottomBorder="true"></board-row>
+          <board-row :rowNumber="0" description="Players" :players="players" :thickBottomBorder="true"></board-row>
         </thead>
         <tbody>
-          <board-row description="Ones" :columns="playerAmount"></board-row>
-          <board-row description="Twoes" :columns="playerAmount"></board-row>
-          <board-row description="Threes" :columns="playerAmount"></board-row>
-          <board-row description="Fours" :columns="playerAmount"></board-row>
-          <board-row description="Fives" :columns="playerAmount"></board-row>
-          <board-row description="Sixes" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+          <board-row :rowNumber="1" description="Ones" :players="players"></board-row>
+          <board-row :rowNumber="2" description="Twoes" :players="players"></board-row>
+          <board-row :rowNumber="3" description="Threes" :players="players"></board-row>
+          <board-row :rowNumber="4" description="Fours" :players="players"></board-row>
+          <board-row :rowNumber="5" description="Fives" :players="players"></board-row>
+          <board-row :rowNumber="6" description="Sixes" :players="players" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sum" :columns="playerAmount"></board-row>
-          <board-row description="Bonus" :columns="playerAmount"></board-row>
-          <board-row description="1 pair" :columns="playerAmount"></board-row>
-          <board-row description="2 pairs" :columns="playerAmount"></board-row>
-          <board-row description="3 equal" :columns="playerAmount"></board-row>
-          <board-row description="4 equal" :columns="playerAmount"></board-row>
-          <board-row description="Small straight" :columns="playerAmount"></board-row>
-          <board-row description="Big straight" :columns="playerAmount"></board-row>
-          <board-row description="House" :columns="playerAmount"></board-row>
-          <board-row description="Chance" :columns="playerAmount"></board-row>
-          <board-row description="Yatzy" :columns="playerAmount" :thickBottomBorder="true"></board-row>
+          <board-row :rowNumber="7" description="Sum" :players="players"></board-row>
+          <board-row :rowNumber="8" description="Bonus" :players="players"></board-row>
+          <board-row :rowNumber="9" description="1 pair" :players="players"></board-row>
+          <board-row :rowNumber="10" description="2 pairs" :players="players"></board-row>
+          <board-row :rowNumber="11" description="3 equal" :players="players"></board-row>
+          <board-row :rowNumber="12" description="4 equal" :players="players"></board-row>
+          <board-row :rowNumber="13" description="Small straight" :players="players"></board-row>
+          <board-row :rowNumber="14" description="Big straight" :players="players"></board-row>
+          <board-row :rowNumber="15" description="House" :players="players"></board-row>
+          <board-row :rowNumber="16" description="Chance" :players="players"></board-row>
+          <board-row :rowNumber="17" description="Yatzy" :players="players" :thickBottomBorder="true"></board-row>
 
-          <board-row description="Sumtotal" :columns="playerAmount"></board-row>
+          <board-row :rowNumber="18" description="Sumtotal" :players="players"></board-row>
         </tbody>
       </table>
       <div class="board-spacer"></div>
@@ -37,7 +37,7 @@
           <img class="player-adder-img" src="../assets/person.png" alt="Add Player (CPU)" />
           <div style="clear: left;"/>
         </div>
-        <div class="player-adder" @click="addPlayer(null, false)">
+        <div class="player-adder" @click="addPlayer('CPU', false)">
           <span class="player-adder-text">+</span>
           <img class="player-adder-img" src="../assets/cpu.svg" alt="Add Player (CPU)" />
           <div style="clear: left;"/>
@@ -66,8 +66,7 @@ export default {
   data() {
     return {
       gameRunning: false,
-      players: [],
-      playerAmount: 0
+      players: []
     }
   },
   methods: {
@@ -108,7 +107,12 @@ $player-adder-width: $player-adder-height;
     }
     $shadow : $shadow + if($i != $through, ", ", "");
   }
+
   box-shadow: unquote($shadow);
+}
+
+.stacked {
+  @include stacked-shadow($through: 30, $even-color: rgb(219, 219, 219), $odd-color: rgb(0, 0, 0));
 }
 
 .board-container {
@@ -156,10 +160,6 @@ $player-adder-width: $player-adder-height;
 
 .board-table:nth-child(1) {
   text-align: left;
-}
-
-.stacked {
-  @include stacked-shadow($through: 30, $even-color: rgb(219, 219, 219), $odd-color: rgb(0, 0, 0));
 }
 
 .player-adder {

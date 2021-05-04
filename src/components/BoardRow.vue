@@ -1,8 +1,8 @@
 <template>
   <tr class="board-row" :class="thickBottomBorder && 'thick-bottom-border'">
     <th class="board-col">{{ description }}</th>
-    <template v-for="column in columns">
-      <td class="board-col" :key="column"></td>
+    <template v-for="player in players">
+      <td class="board-col" :key="player.id">{{ player.list[rowNumber] }}</td>
     </template>
   </tr>
 </template>
@@ -11,8 +11,9 @@
 export default {
   name: "BoardRow",
   props: {
+    rowNumber: Number,
     description: String,
-    columns: Number,
+    players: Array,
     thickBottomBorder: {
       default: false,
       type: Boolean
