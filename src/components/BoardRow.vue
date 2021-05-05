@@ -28,12 +28,27 @@ export default {
   min-width: 30px;
 }
 
+/* NB: False-positive "unused" warning, this selector is very much in use. */
 .thick-bottom-border {
   border-bottom-width: 2px !important;
 }
 
-.board-table td {
+/* Header Columns (1st column) */
+.board-table th {
+  padding-right: 10px;
+}
+
+/* Player name columns */
+.board-table thead>tr>td {
+  padding-right: 10px;
+  text-align: center;
+  border-left: 1px solid black;
+}
+
+/* Numeric score columns */
+.board-table tbody>tr>td {
   border-left: 1px solid black;
   font-family: cursive;
+  text-align: center;
 }
 </style>

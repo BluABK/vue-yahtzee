@@ -132,7 +132,6 @@ $player-adder-width: $player-adder-height;
   float: left;
   empty-cells: show;
   border-collapse: collapse;
-  /*border: 1px solid black;*/
 }
 
 .board-table thead {
@@ -147,13 +146,8 @@ $player-adder-width: $player-adder-height;
   border: 1px solid black;
 }
 
-/*.board-table th {*/
-/*  background-color: yellowgreen;*/
-/*  border-left: 5px solid black;*/
-/*}*/
-
 .board-table td {
-  /*border: 1px solid black;*/
+  /*border: 1px solid black;
   /*border-left: 5px solid black;*/
   font-family: cursive;
 }
