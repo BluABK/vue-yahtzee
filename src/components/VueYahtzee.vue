@@ -3,6 +3,21 @@
     <h1>{{ msg }}</h1>
     <Settings />
     <div class="board-container">
+      <div class="player-adder-container">
+        <div class="player-adder" @click="addPlayer()">
+          <span class="player-adder-text">+</span>
+          <img class="player-adder-img" src="../assets/person.png" alt="Add Player (CPU)" />
+          <div style="clear: left;"/>
+        </div>
+        <div class="player-adder" @click="addPlayer('CPU', false)">
+          <span class="player-adder-text">+</span>
+          <img class="player-adder-img" src="../assets/cpu.svg" alt="Add Player (CPU)" />
+          <div style="clear: left;"/>
+        </div>
+      </div>
+
+      <div class="board-spacer"></div>
+
       <table class="board-table paper stacked">
         <thead>
           <board-row :rowNumber="0" description="Players" :players="players" :thickBottomBorder="true"></board-row>
@@ -30,19 +45,6 @@
           <board-row :rowNumber="18" description="Sumtotal" :players="players"></board-row>
         </tbody>
       </table>
-      <div class="board-spacer"></div>
-      <div class="player-adder-container">
-        <div class="player-adder" @click="addPlayer()">
-          <span class="player-adder-text">+</span>
-          <img class="player-adder-img" src="../assets/person.png" alt="Add Player (CPU)" />
-          <div style="clear: left;"/>
-        </div>
-        <div class="player-adder" @click="addPlayer('CPU', false)">
-          <span class="player-adder-text">+</span>
-          <img class="player-adder-img" src="../assets/cpu.svg" alt="Add Player (CPU)" />
-          <div style="clear: left;"/>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -117,6 +119,8 @@ $player-adder-width: $player-adder-height;
 
 .board-container {
   display: inline-block;
+  position: absolute;
+  left: 0;
 }
 
 .board-spacer {
@@ -125,11 +129,11 @@ $player-adder-width: $player-adder-height;
 }
 
 .player-adder-container {
-  float: right;
+  float: left;
 }
 
 .board-table {
-  float: left;
+  float: right;
   empty-cells: show;
   border-collapse: collapse;
 }

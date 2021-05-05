@@ -29,23 +29,23 @@ export class ScoreBoard {
     }
 
     clear() {
-        this.ones = 0;
-        this.twoes = 0;
-        this.threes = 0;
-        this.fours = 0;
-        this.fives = 0;
-        this.sixes = 0;
-        this.sum = 0;
-        this.bonus = 0;
-        this.pair = 0;
-        this.pairs = 0;
-        this.equal3 = 0;
-        this.equal4 = 0;
-        this.smallStraight = 0;
-        this.bigStraight = 0;
-        this.house = 0;
-        this.chance = 0;
-        this.yatzy = 0;
-        this.sumtotal = 0;
+        this.ones = null;
+        this.twoes = null;
+        this.threes = null;
+        this.fours = null;
+        this.fives = null;
+        this.sixes = null;
+        this.sum = null;
+        this.bonus = null;
+        this.pair = null;
+        this.pairs = null;
+        this.equal3 = null;
+        this.equal4 = null;
+        this.smallStraight = null;
+        this.bigStraight = null;
+        this.house = null;
+        this.chance = null;
+        this.yatzy = null;
+        this.sumtotal = null;
     }
 }
