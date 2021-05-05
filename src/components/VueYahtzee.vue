@@ -46,6 +46,16 @@
         </tbody>
       </table>
     </div>
+    <button name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>
+    <button name="btn-sim-round" @click="rollAllDie()">Roll die</button>
+    <div class="rolled-die-container">
+<!--      <div v-for="die in currentRolledDie" class="die">-->
+<!--        <p>{{ die }}</p>-->
+<!--      </div>-->
+      <template v-for="(die, index) in currentRolledDie">
+        <p :key="index">{{ die }}</p>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -62,13 +72,20 @@ export default {
   props: {
     msg: String
   },
+  created() {
+    // Constants (added to Vue object to avoid adding reactive overhead).
+    this.SCORE_BOARD_ROWS = 18;
+  },
   computed: {
 
   },
   data() {
     return {
-      gameRunning: false,
-      players: []
+      players: [],
+      gameRunning: false, // FIXME: Tie to (prevent) player-adding and other..
+      currentScoreBoardRow: 0,
+      currentPlayer: null,
+      currentRolledDie: []
     }
   },
   methods: {
@@ -76,6 +93,37 @@ export default {
       let player = new Player(name, isHuman);
       this.players.push(player);
       console.log("Added player", player);
+    },
+
+    rollDice(min = 1, max = 6) {
+      return (min - 1) + Math.ceil(Math.random() * (max - min + 1))
+    },
+
+    rollAllDie(dieToRoll = 5) {
+      let die = [];
+
+      for (let i = 0; i < dieToRoll; i++) {
+        die.push(this.rollDice())
+      }
+
+      this.currentRolledDie = die;
+      console.log("currentRolledDie", this.currentRolledDie);
+    },
+
+    // playScoreBoardRow(rowNumber) {
+    //   for (let player of this.players) {
+    //     console.log(player);
+    //   }
+    // },
+
+    playForcedGame() {
+      this.gameRunning = true;
+
+      // For each row in score board.
+      for (let i = 0; i < this.SCORE_BOARD_ROWS; i++) {
+        console.log(i);
+        // this.playScoreBoardRow(i);
+      }
     }
   }
 }
@@ -180,6 +228,12 @@ $player-adder-width: $player-adder-height;
   height: $player-adder-height;
   width: $player-adder-height;
   float: right;
+}
+
+.rolled-die-container {
+  //min-width: 300px;
+  //min-height: 300px;
+  //background-color: steelblue;
 }
 </style>
 
