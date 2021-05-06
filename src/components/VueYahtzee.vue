@@ -46,14 +46,13 @@
         </tbody>
       </table>
     </div>
-    <button name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>
-    <button name="btn-sim-round" @click="rollAllDie()">Roll die</button>
-    <div class="rolled-die-container">
-<!--      <div v-for="die in currentRolledDie" class="die">-->
-<!--        <p>{{ die }}</p>-->
-<!--      </div>-->
-      <template v-for="(die, index) in currentRolledDie">
-        <p :key="index">{{ die }}</p>
+    <button :disabled="players.length <= 0" name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>
+    <button :disabled="players.length <= 0" name="btn-sim-round" @click="rollAllDice()">Roll die</button>
+    <div class="rolled-dice-container">
+      <template v-for="(die, index) in currentlyRolledDice">
+        <div class="die" :key="index">
+          <img :src="require(`@/assets/dice/dieFace${die}.png`)" :alt="die" :title="die">
+        </div>
       </template>
     </div>
   </div>
@@ -77,7 +76,9 @@ export default {
     this.SCORE_BOARD_ROWS = 18;
   },
   computed: {
-
+    // assetDice () {
+    //   return require(`./assets/dice`)
+    // }
   },
   data() {
     return {
@@ -85,7 +86,7 @@ export default {
       gameRunning: false, // FIXME: Tie to (prevent) player-adding and other..
       currentScoreBoardRow: 0,
       currentPlayer: null,
-      currentRolledDie: []
+      currentlyRolledDice: []
     }
   },
   methods: {
@@ -99,15 +100,15 @@ export default {
       return (min - 1) + Math.ceil(Math.random() * (max - min + 1))
     },
 
-    rollAllDie(dieToRoll = 5) {
-      let die = [];
+    rollAllDice(diceToRoll = 5) {
+      let dice = [];
 
-      for (let i = 0; i < dieToRoll; i++) {
-        die.push(this.rollDice())
+      for (let i = 0; i < diceToRoll; i++) {
+        dice.push(this.rollDice())
       }
 
-      this.currentRolledDie = die;
-      console.log("currentRolledDie", this.currentRolledDie);
+      this.currentlyRolledDice = dice;
+      console.log("currentlyRolledDice", this.currentlyRolledDice);
     },
 
     // playScoreBoardRow(rowNumber) {
@@ -230,10 +231,20 @@ $player-adder-width: $player-adder-height;
   float: right;
 }
 
-.rolled-die-container {
+.rolled-dice-container {
+  //display: inline-block;
   //min-width: 300px;
   //min-height: 300px;
   //background-color: steelblue;
+}
+
+.die:hover {
+  cursor: pointer;
+}
+
+.die>img {
+  height: 50px;
+  width: 50px;
 }
 </style>
 
