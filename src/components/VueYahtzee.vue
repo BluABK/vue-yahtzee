@@ -96,7 +96,7 @@ export default {
       console.log("Added player", player);
     },
 
-    rollDice(min = 1, max = 6) {
+    rollDie(min = 1, max = 6) {
       return (min - 1) + Math.ceil(Math.random() * (max - min + 1))
     },
 
@@ -104,7 +104,7 @@ export default {
       let dice = [];
 
       for (let i = 0; i < diceToRoll; i++) {
-        dice.push(this.rollDice())
+        dice.push(this.rollDie())
       }
 
       this.currentlyRolledDice = dice;
