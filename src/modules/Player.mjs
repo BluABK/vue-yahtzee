@@ -19,7 +19,6 @@ export class Player {
         scoreList.unshift(this.name);
 
         // Return modified list (index maps directly with yatzy scoreboard table).
-        console.log("Player.list()", scoreList);
         return scoreList;
     }
 }
