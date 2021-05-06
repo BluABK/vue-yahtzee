@@ -48,10 +48,11 @@
     </div>
     <button :disabled="players.length <= 0" name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>
     <button :disabled="players.length <= 0" name="btn-sim-round" @click="rollAllDice()">Roll die</button>
+    <br />
     <div class="rolled-dice-container">
-      <template v-for="(die, index) in currentlyRolledDice">
-        <div class="die" :key="index">
-          <img :src="require(`@/assets/dice/dieFace${die}.png`)" :alt="die" :title="die">
+      <template v-for="(value, index) in currentlyRolledDice">
+        <div v-if="currentlyRolledDice.length > 0" class="die" :key="index" @click="selectCurrentlyRolledDie(index)">
+          <img :src="require(`@/assets/dice/dieFace${value}.png`)" :alt="value" :title="value"/>
         </div>
       </template>
     </div>
@@ -109,6 +110,10 @@ export default {
 
       this.currentlyRolledDice = dice;
       console.log("currentlyRolledDice", this.currentlyRolledDice);
+    },
+
+    selectCurrentlyRolledDie(diceIndex) {
+      console.log(`selectDie`, diceIndex, this.currentlyRolledDice[diceIndex]);
     },
 
     // playScoreBoardRow(rowNumber) {
@@ -232,14 +237,24 @@ $player-adder-width: $player-adder-height;
 }
 
 .rolled-dice-container {
-  //display: inline-block;
+  display: inline-block;
   //min-width: 300px;
   //min-height: 300px;
   //background-color: steelblue;
 }
 
+.die {
+  float: left;
+  padding: 5px;
+}
+
 .die:hover {
   cursor: pointer;
+  filter: invert(10%) sepia(1%) saturate(3207%) hue-rotate(175deg) brightness(100%) contrast(100%);
+}
+
+.selected-die {
+  filter: invert(20%) sepia(1%) saturate(3207%) hue-rotate(175deg) brightness(100%) contrast(100%);
 }
 
 .die>img {
