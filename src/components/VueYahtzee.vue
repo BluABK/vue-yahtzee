@@ -46,8 +46,10 @@
         </tbody>
       </table>
     </div>
-    <button :disabled="players.length <= 0" name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>
-    <button :disabled="players.length <= 0" name="btn-sim-round" @click="rollAllDice()">Roll die</button>
+<!--    <button :disabled="players.length <= 0" name="btn-sim-game-forced" @click="playForcedGame()">Simulate game (forced)</button>-->
+    <button v-if="gameRunning === false" :disabled="players.length <= 0" name="btn-start" @click="rollAllDice()" title="Start a new game">Start</button>
+    <button v-if="gameRunning === true" :disabled="players.length <= 0" name="btn-roll" @click="rollAllDice()" title="Roll all (unkept) dice.">Roll die</button>
+    <button v-if="gameRunning === true" :disabled="players.length <= 0" name="btn-end-turn" @click="endTurn()" title="End your turn (keeps on-screen dice and puts all your kept dice on the board).">End turn</button>
     <br />
     <div class="rolled-dice-container">
       <template v-for="(value, index) in currentlyRolledDice">
@@ -87,7 +89,8 @@ export default {
       gameRunning: false, // FIXME: Tie to (prevent) player-adding and other..
       currentScoreBoardRow: 0,
       currentPlayer: null,
-      currentlyRolledDice: []
+      currentlyRolledDice: [],
+      // currentlyKeptDice: [] // FIXME: Likely unnecessary
     }
   },
   methods: {
@@ -98,6 +101,8 @@ export default {
     },
 
     rollDie(min = 1, max = 6) {
+      this.gameRunning = true;
+
       return (min - 1) + Math.ceil(Math.random() * (max - min + 1))
     },
 
@@ -115,6 +120,9 @@ export default {
     selectCurrentlyRolledDie(diceIndex) {
       console.log(`selectDie`, diceIndex, this.currentlyRolledDice[diceIndex]);
 
+      // console.log("currentlyRolledDice", this.currentlyRolledDice);
+
+
     },
 
     // playScoreBoardRow(rowNumber) {
@@ -122,6 +130,10 @@ export default {
     //     console.log(player);
     //   }
     // },
+
+    endTurn() {
+      console.error("IMPLEMENT ME!");
+    },
 
     playForcedGame() {
       this.gameRunning = true;
@@ -197,6 +209,7 @@ $player-adder-width: $player-adder-height;
   float: right;
   empty-cells: show;
   border-collapse: collapse;
+  text-align: left;
 }
 
 .board-table thead {

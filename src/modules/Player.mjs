@@ -9,6 +9,12 @@ export class Player {
         this.name = name;
         this.isHuman = isHuman;
         this.scores = new ScoreBoard();
+
+        // --- Round specific:
+        // List of values for currently kept dice.
+        this.currentlyKeptDice = [];
+        // List of Vue.data.currentlyRolledDice indexes of player's currently selected dice.
+        this.currentlySelectedDiceIndexes = [];
     }
 
     get list() {
